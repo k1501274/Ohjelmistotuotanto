@@ -5,14 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
+
 namespace Korjaamon_veloituslaskuri
 {
-    public class Korjaamo
+    public class Laskuri : Korjaamo1
     {
-        private string nimi;
-        private string osoite;
-        private double tuntihinta;
 
+        public string nimi;
+        public string osoite;
+        public double tuntihinta;
+        
 
         public string Nimi
         {
@@ -35,13 +37,14 @@ namespace Korjaamon_veloituslaskuri
 
 
 
-        public Korjaamo(string nimi, string osoite, double tuntihinta)
+        public Laskuri (string nimi, string osoite, double tuntihinta)
         {
             Nimi = nimi;
             Osoite = osoite;
             Tuntihinta = tuntihinta;
 
         }
+
 
         public void LaskeHinta()
         {
@@ -52,46 +55,56 @@ namespace Korjaamon_veloituslaskuri
             double tyoaika = 0;
             double aleVaraosa = 0;
             double aleTyo = 0;
+            string tuote=" ";
+
+            List<string> OsaLista = new List<string>();
 
 
-
-
-            while (varaosanhinta != -1)
+            while (tuote != "")
             {
                 osatyht = osatyht + varaosanhinta;
 
+                Console.Write("Tuotenimike: ");
+                tuote = Console.ReadLine();
 
-                Console.Write("Anna tuotteen hinta: (-1 lopettaa tuotteiden syöttämisen)");
-                varaosanhinta = Convert.ToDouble(Console.ReadLine());
+
+                OsaLista.Add(tuote);
+
+
+                if (tuote != "")
+
+                { 
+                    Console.Write("Hinta: ");
+                
+                    varaosanhinta = Convert.ToDouble(Console.ReadLine());
+
+                }
+
 
 
             }
 
-            Console.Write("Alennus prosentteina varaosista ");
+            Console.Write("\nAlennus prosentteina varaosista ");
             aleVaraosa = Convert.ToDouble(Console.ReadLine());
 
-            Console.Write("\nkauanko työhön meni aikaa(h)? ");
+            Console.Write("\nTyöaika (h): ");
             tyoaika = Convert.ToDouble(Console.ReadLine());
 
 
-            Console.Write("Alennus prosentteina tyosta ");
+            Console.Write("Alennus prosentteina työsta ");
             aleTyo = Convert.ToDouble(Console.ReadLine());
+
+
+            
 
 
 
 
             tyohinta = tuntihinta * tyoaika;
-
-
-
-
             kokonaishinta = osatyht * ((100 - aleVaraosa) / 100) + tyohinta * ((100 - aleTyo) / 100);
 
 
-
-
-
-            Console.WriteLine("\nOsat yhteensä: {0} euroa ", osatyht * ((100 - aleVaraosa) / 100));
+            Console.WriteLine("\nOsat: " + (String.Join(", ", OsaLista)) + " yhteensä: {0} euroa ", osatyht * ((100 - aleVaraosa) / 100));
             Console.WriteLine("{0} euron tuntiveloituksella työveloitus yhteensä: {1} euroa", tuntihinta, tyohinta * ((100 - aleTyo) / 100));
             Console.WriteLine("\nOsat ja työ yhteensä : {0} euroa", kokonaishinta);
             Console.ReadLine();

@@ -7,14 +7,14 @@ using System.IO;
 
 namespace Korjaamon_veloituslaskuri
 {
-    class AsiakasHaku
+    public class AsiakasHaku : Korjaamo1
     {
         public void Hae()
         {
 
             {
                 //Luetaan asiakaskanta tiedosto
-                IEnumerable<string> lines = File.ReadAllLines(@"M:\OSHSU19S\Olio-ohjelmointi\Korjaamon_veloituslaskuri\Asiakaskanta.csv",/*ääkköset näkyviin*/ System.Text.Encoding.Default);
+                IEnumerable<string> lines = File.ReadAllLines(@"M:\OSHSU19S\Olio-ohjelmointi\Korjaamon_veloituslaskuri_versio2\Asiakaskanta.csv",/*ääkköset näkyviin*/ System.Text.Encoding.Default);
 
 
 
@@ -25,13 +25,13 @@ namespace Korjaamon_veloituslaskuri
                 string input = Console.ReadLine().Trim();
 
                 //etsitään vastaavuuksia asiakaslistasta
-                IEnumerable<string> matches = !String.IsNullOrEmpty(input)
+                IEnumerable<string> matches = !string.IsNullOrEmpty(input)
                                               ? lines.Where(line => line.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0)
                                               : Enumerable.Empty<string>();
 
                 //jos vastaavuuksia löytyy, kirjoitetaan konsoliin
                 Console.WriteLine(matches.Any()
-                                  ? String.Format("Auton/omistajan tiedot: {0}", String.Join("", matches))
+                                  ? String.Format("\nAuton/omistajan tiedot: {0}", String.Join("", matches))
 
                                   //Jos vastaavuuksia ei löydy
                                   : "\nAsiakasta ei löytynyt, sulje ohjelma ja lisää asiakas tietokantaan");
