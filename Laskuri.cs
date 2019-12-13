@@ -64,7 +64,7 @@ namespace Korjaamon_veloituslaskuri
             {
                 osatyht = osatyht + varaosanhinta;
 
-                Console.Write("Tuotenimike: ");
+                Console.Write("Tuotenimike (tyhjä arvo lopettaa tuotteiden syöttämisen): ");
                 tuote = Console.ReadLine();
 
 
