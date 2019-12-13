@@ -22,24 +22,43 @@ namespace Korjaamon_veloituslaskuri
 
 
                 Console.Write("\nAnna rekisterinumero (XUP-108, JGU-856 ja BMF-863 löytyy tietokannasta): ");
+
+                
+
                 string input = Console.ReadLine().Trim();
 
-                //etsitään vastaavuuksia asiakaslistasta
-                IEnumerable<string> matches = !string.IsNullOrEmpty(input)
-                                              ? lines.Where(line => line.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0)
-                                              : Enumerable.Empty<string>();
-
-                //jos vastaavuuksia löytyy, kirjoitetaan konsoliin
-                Console.WriteLine(matches.Any()
-                                  ? String.Format("\nAuton/omistajan tiedot: {0}", String.Join("", matches))
-
-                                  //Jos vastaavuuksia ei löydy
-                                  : "\nAsiakasta ei löytynyt, sulje ohjelma ja lisää asiakas tietokantaan");
-
-                Console.WriteLine("\n");
+                if (input.Length != 7)
+                {
+                    Console.WriteLine("Ajoneuvoa ei löydy tietokannasta, sulje ohjelma ja lisää auton ja asiakkaan tiedot tietokantaan");
+                    
+                  
+                }
+                
+                else
+                {
 
 
 
+
+
+
+
+                    //etsitään vastaavuuksia asiakaslistasta
+                    IEnumerable<string> matches = !string.IsNullOrEmpty(input)
+                                                 ? lines.Where(line => line.IndexOf(input, StringComparison.OrdinalIgnoreCase) >= 0)
+                                                  : Enumerable.Empty<string>();
+
+                    //jos vastaavuuksia löytyy, kirjoitetaan konsoliin
+                    Console.WriteLine(matches.Any()
+                                      ? String.Format("\nAuton/omistajan tiedot: {0}", String.Join("", matches))
+
+                                      //Jos vastaavuuksia ei löydy
+                                      : "\nAsiakasta ei löytynyt, sulje ohjelma ja lisää asiakas tietokantaan");
+
+                    Console.WriteLine("\n");
+
+
+                }
             }
         }
 
